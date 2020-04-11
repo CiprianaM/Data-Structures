@@ -33,21 +33,23 @@ class SingleLinkedList {
     const node = new SingleNode(value);
     let index = 0;
     let currentNode = this.head;
-    while(index+1<position && currentNode.next) {
+    while(index+1 < position && currentNode.next) {
       index++;
-      currentNode=currentNode.next;
+      currentNode = currentNode.next;
     }
-    if (index+1<position) {console.log('could not insert'); return false}
-    node.next=currentNode.next;
-    currentNode.next=node;
+    if (index+1 < position) {
+      return false;
+    }
+    node.next = currentNode.next;
+    currentNode.next = node;
     return true;
   }
 
   deleteFromHead() {
-    if (this.head===null) {
+    if (this.head === null) {
       return false;
     }
-    if (this.head===this.tail) {
+    if (this.head === this.tail) {
       this.head = this.tail = null;
     } else {
       this.head = this.head.next;
@@ -55,10 +57,10 @@ class SingleLinkedList {
     return true;
   }
   deleteFromTail() {
-    if (this.head===null) {
+    if (this.head === null) {
       return false;
     }
-    if (this.head===this.tail) {
+    if (this.head === this.tail) {
       this.head = this.tail = null;
     } else {
       let currentNode = this.head;
@@ -75,37 +77,29 @@ class SingleLinkedList {
   deleteFromPosition(position) {
     let index = 0;
     let currentNode = this.head;
-    while((index+1)<position &&currentNode.next) {
+    while((index+1) < position && currentNode.next) {
       index++;
-      currentNode=currentNode.next
+      currentNode = currentNode.next;
     }
     if (currentNode.next) {
-      if (currentNode==this.head) {
+      if (currentNode === this.head) {
+        currentNode.next.previous = null;
         this.head = currentNode.next;
         return true;
       }
-      currentNode.next=currentNode.next.next;
-      if (!currentNode.next) {this.tail=currentNode}
-      return true
+      currentNode.next.next.previous = currentNode.next;
+      currentNode.next = currentNode.next.next;
+      if (!currentNode.next) {
+        this.tail = currentNode;
+      }
+      return true;
     } else {
       if (!currentNode.next) {
-        console.log('position outside range')
         return false;
       }
     }
     return false;
   }
 }
-
-// let list = new SingleLinkedList();
-// list.insertAtHead('A');//A
-// list.insertAtTail('B');//AB
-// list.insertAtTail('C')//ABC
-// list.insertAtTail('D')//ABCD
-// list.insertAtPosition('E', 2)//ABECD
-// list.deleteFromHead()//BECD
-// list.deleteFromHead()//ECD
-// list.deleteFromPosition(0)//CD
-// console.log(list)
 
 module.exports = SingleLinkedList;

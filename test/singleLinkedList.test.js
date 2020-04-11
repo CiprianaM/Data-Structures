@@ -56,27 +56,3 @@ test('Deletion', () => {
     }
   })
 })
-
-// anotherList.deleteFromHead();
-// anotherList.insertNodeAtHead(anotherNode1);//A
-// anotherList.insertNodeAtTail(anotherNode2);//AB
-// anotherList.insertNodeAtHead(anotherNode3);//CAB
-// anotherList.deleteFromHead();//AB
-// anotherList.deleteFromTail();//A
-// anotherList.insertNodeAtHead(anotherNode4);//DA
-// anotherList.insertNodeAtTail(anotherNode5);//DAE
-// anotherList.insertNodeAtPosition(anotherNode6,1)//DFAE
-// anotherList.deleteFromPosition(2);//DFE
-// anotherList.deleteFromPosition(1);//DE
-
-// test('Deletion', () => {
-//   expect(anotherList).toEqual({
-//     head: {
-//       data: 'D',
-//       next: {
-//         data: 'E',
-//         next: null
-//       }
-//     },
-//   })
-// })
