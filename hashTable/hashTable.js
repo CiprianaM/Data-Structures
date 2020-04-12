@@ -29,19 +29,52 @@ hashTable.prototype.insert = function (key, value) {
     key,
     value
   }
-  //link newly created node to the head
+  //link newly created node to the previous head; now the new elem is the new head
   if (head) newNode.next = head;
   this.used++;
+  //overwrite previous linked list with new linked list
   this.storage.set(index, value);
   return true;
 }
 
-hashTable.prototype.delete = function () {
-
+hashTable.prototype.delete = function (key) {
+  //get index
+  const index = hash(key, this.size);
+  //retrieve head at index. First element will be the head of the list
+  const head = this.storage.get(index);
+  //create temporary node to use to iterate through linked list; for each exixting node, check if you have the right key
+  let node = head;
+  if (node.key === key) {
+    this.storage.set(index, node.next);
+    this.used--;
+    return true;
+  }
+  while (node.next) {
+    if (node.next.key===key) {
+      node.next = node.next.next;
+      this.used--;
+      return true;
+    }
+  }
+  return false;
 }
 
-hashTable.prototype.retrieve = function () {
-
+hashTable.prototype.retrieve = function (key) {
+  const index = hash(key, size);
+  const head = this.storage.get(index);
+  let node = head;
+  //if something has been retrieved, iterate through linked list and compare all keys to given key. if found, return it
+  while (node) {
+    if (node.key===key) {
+      return ({
+        key: node.key,
+        value: node.value
+      })
+    }
+    node = node.next;
+  }
+  //if we've reached the end of the list without returning found elem, return false
+  return false;
 }
 
 hashTable.prototype._checkSize = function() {
