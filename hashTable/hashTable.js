@@ -77,6 +77,8 @@ hashTable.prototype.retrieve = function (key) {
   return false;
 }
 
+//TODO
+
 hashTable.prototype._checkSize = function() {
 
 }
